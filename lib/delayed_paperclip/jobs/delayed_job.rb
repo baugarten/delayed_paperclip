@@ -10,7 +10,7 @@ module DelayedPaperclip
           defined_options = instance_klass.constantize.attachment_definitions[attachment_name][:delayed]
           options = {
             :payload_object => new(instance_klass, instance_id, attachment_name),
-            :priority => defined_options[:priority].to_i
+            :priority => defined_options[:priority].to_i,
             :queue => defined_options[:queue_name]
           }
 
