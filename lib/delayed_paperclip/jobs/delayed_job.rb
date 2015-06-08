@@ -13,8 +13,8 @@ module DelayedPaperclip
           }
 
           
-          if instance_klass.method_defined? :queue_name
-            options[:queue] = instance_klass.queue_name
+          if Delayed::Worker.queue_names and Delayed::Worker.queue_names[instance_klass.downcase]
+            options[:queue] = Delayed::Worker.queue_names[instance_klass.downcase]
           elsif defined? Delayed::Worker.default_queue_name
             # version 3.X
             options[:queue] = :paperclip
