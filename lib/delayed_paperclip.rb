@@ -12,6 +12,7 @@ module DelayedPaperclip
         :background_job_class => detect_background_task,
         :url_with_processing  => true,
         :processing_image_url => nil
+        :queue_name => Delayed::Worker.default_queue_name or :paperclip
       }
     end
 
@@ -54,6 +55,7 @@ module DelayedPaperclip
         :only_process => attachment_definitions[name][:only_process],
         :url_with_processing => DelayedPaperclip.options[:url_with_processing],
         :processing_image_url => options[:processing_image_url]
+        :queue_name => DelayedPaperclip.options[:queue_name]
       }.each do |option, default|
 
         attachment_definitions[name][:delayed][option] = options.key?(option) ? options[option] : default
