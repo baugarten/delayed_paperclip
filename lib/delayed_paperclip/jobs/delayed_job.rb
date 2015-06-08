@@ -12,7 +12,10 @@ module DelayedPaperclip
             :priority => instance_klass.constantize.attachment_definitions[attachment_name][:delayed][:priority].to_i
           }
 
-          if defined? Delayed::Worker.default_queue_name
+          
+          if instance_klass.method_defined? :queue_name
+            options[:queue] = instance_klass.queue_name
+          elsif defined? Delayed::Worker.default_queue_name
             # version 3.X
             options[:queue] = :paperclip
           end
