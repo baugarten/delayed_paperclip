@@ -11,8 +11,8 @@ module DelayedPaperclip
       @options ||= {
         :background_job_class => detect_background_task,
         :url_with_processing  => true,
-        :processing_image_url => nil
-        :queue_name => Delayed::Worker.default_queue_name or :paperclip
+        :processing_image_url => nil,
+        :queue_name => (Delayed::Worker.default_queue_name or :paperclip)
       }
     end
 
